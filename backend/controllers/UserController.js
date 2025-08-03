@@ -1,19 +1,18 @@
-const { User } = require('../models/models');
+const model = require('../models/userModel')
+const ctrl = {}
 
-exports.getAllUsers = async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+ctrl.getUsers = async (req, res) => {
+    try {
+        const result = await model.getUsers();
+        // const result = await model.test();
+        
+        //return res.status(200).json(result);
+        return res.status(200).json(result);
+    } catch(error) {
+        res.status(400).json('Error : ' + error);
+    }
+
 };
 
-exports.createUser = async (req, res) => {
-  try {
-    const newUser = await User.create(req.body);
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
+
+module.exports = ctrl

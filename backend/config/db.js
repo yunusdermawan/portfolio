@@ -1,14 +1,21 @@
-const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize('portfolio_database', 'root', 'anonine123', {
+const mysql = require('mysql2');
+ 
+const pool = mysql.createPool({
+  user: 'root',
   host: 'localhost',
-  dialect: 'mysql',
-  logging: false, // Disable logging; remove or set to true if you prefer logs
-  dialectOptions: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
-});
+  database: 'portfolio_app',
+  password: 'contoll',
+  port: '3306',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+}).promise()
 
-module.exports = sequelize;
+// async function testQuery() {
+//   const [rows] = await pool.query("SELECT * from test_table");
+//   console.log(rows);
+// }
+
+// testQuery();
+
+module.exports = pool;
