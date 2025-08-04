@@ -14,5 +14,44 @@ ctrl.getUsers = async (req, res) => {
 
 };
 
+ctrl.getSingleUserById = async (req, res) => {
+    try {
+        const result = await model.getSingleUserById(req.params.id)
+        return res.json(result)
+    } catch(err) {
+        res.json('Error : ' + err)
+    }
+}
+
+ctrl.getSingleUserByName = async (req, res) => {
+    try {
+        const {name} = req.body
+        const result = await model.getSingleUserByName(name)
+        return res.json(result)
+    } catch(err) {
+        res.json('Error : ' + err)
+    }
+}
+
+ctrl.createUser = async (req, res) => {
+    try {
+        const {name, job_headline, profile_pict, bio, location, email} = req.body
+        const result = await model.createUser({name, job_headline, profile_pict, bio, location, email})
+        // console.log(result)
+        return res.json({
+            id: result.insertId,
+            name,
+            job_headline,
+            profile_pict,
+            bio,
+            location,
+            email
+        })
+    } catch(err) {
+        console.log(err)
+        res.json('Error : ' + err)
+    }
+}
+
 
 module.exports = ctrl
