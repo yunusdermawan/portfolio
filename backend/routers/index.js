@@ -7,6 +7,7 @@ const certifications = require('./certifications')
 const experiences = require('./experiences')
 const projects = require('./projects')
 const skills = require('./skills')
+const socials = require('./socials')
 
 
 router.use('/users', users)
@@ -15,5 +16,7 @@ router.use('/cert', certifications)
 router.use('/exp', experiences)
 router.use('/projects', projects)
 router.use('/skills', skills)
+router.use('/socials', socials)
+
 
 module.exports = router
