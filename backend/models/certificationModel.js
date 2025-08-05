@@ -7,7 +7,16 @@ model.getCertifications = async () => {
         const [rows] = await db.query('SELECT * FROM certifications')
         return rows
     } catch(err) {
-        throw err.message
+        throw 'Error : ' + err.message
+    }
+}
+
+model.getCertificationById = async (id) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM certifications WHERE id = ?', [id])
+        return rows
+    } catch(err) {
+        throw 'Error : ' + err.message
     }
 }
 

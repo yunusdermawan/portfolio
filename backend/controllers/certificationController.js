@@ -10,4 +10,15 @@ ctrl.getCertifications = async (req, res) => {
     }
 }
 
+ctrl.getCertificationById = async (req, res) => {
+    try {
+        const id = req.params.id
+        const result = await model.getCertificationById(id)
+        return res.json(result)
+    } catch(err) {
+        res.json('Error : ' + err)
+    }
+}
+
+
 module.exports = ctrl
