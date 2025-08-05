@@ -29,12 +29,73 @@ model.getSingleUserByName = async (name) => {
     }
 }
 
-model.createUser = async ({name, job_headline, profile_pict, bio, location, email}) => {
+model.createUser = async ({
+    name, 
+    job_headline, 
+    profile_pict, 
+    bio, 
+    location, 
+    email
+}) => {
     try {
-        const [rows] = await db.query('INSERT INTO users (name, job_headline, profile_pict, bio, location, email) VALUES (?, ?, ?, ?, ?, ?)', [name, job_headline, profile_pict, bio, location, email])
+        const [rows] = await db.query(`INSERT INTO users (
+            name, 
+            job_headline, 
+            profile_pict, 
+            bio, 
+            location, 
+            email
+            ) VALUES (
+             ?, 
+             ?, 
+             ?, 
+             ?, 
+             ?, 
+             ?
+             )`, [
+                name, 
+                job_headline, 
+                profile_pict, 
+                bio, 
+                location, 
+                email
+            ])
         return rows
     } catch(err) {
         throw 'Error : ' + err.message
+    }
+}
+
+model.updateUser = async ({
+    name, 
+    job_headline, 
+    profile_pict, 
+    bio, 
+    location, 
+    email,
+    id
+}) => {
+    try {
+        const [rows] = await db.query(`UPDATE users SET 
+            name = ?, 
+            job_headline = ?, 
+            profile_pict = ?, 
+            bio = ?, 
+            location = ?, 
+            email = ? 
+            WHERE id = ?` 
+            , [
+                name, 
+                job_headline, 
+                profile_pict, 
+                bio, 
+                location, 
+                email,
+                id
+            ])
+        return rows
+    } catch(err) {
+        throw 'Error : ' + err
     }
 }
 

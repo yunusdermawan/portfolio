@@ -35,9 +35,22 @@ ctrl.getSingleUserByName = async (req, res) => {
 
 ctrl.createUser = async (req, res) => {
     try {
-        const {name, job_headline, profile_pict, bio, location, email} = req.body
-        const result = await model.createUser({name, job_headline, profile_pict, bio, location, email})
-        // console.log(result)
+        const {
+            name, 
+            job_headline, 
+            profile_pict, 
+            bio, 
+            location, 
+            email
+        } = req.body
+        const result = await model.createUser({
+            name, 
+            job_headline, 
+            profile_pict, 
+            bio, 
+            location, 
+            email
+        })
         return res.json({
             id: result.insertId,
             name,
@@ -53,5 +66,40 @@ ctrl.createUser = async (req, res) => {
     }
 }
 
+ctrl.updateUser = async (req, res) => {
+    try {
+        const id = req.params.id
+        const {
+            name, 
+            job_headline, 
+            profile_pict, 
+            bio, 
+            location, 
+            email
+        } = req.body
+        const result = await model.updateUser({
+            name, 
+            job_headline, 
+            profile_pict, 
+            bio, 
+            location, 
+            email,
+            id
+        })
+        return res.json(
+            `User ` + id + ` successfully updated!\n` + 
+            `
+            name : ${name}
+            job_headline : ${job_headline}, 
+            profile_pict : ${profile_pict}, 
+            bio : ${bio}, 
+            location : ${location}, 
+            email : ${email},
+            `
+        )
+    } catch(err) {
+        res.json('Error : ' + err)
+    }
+}
 
 module.exports = ctrl
