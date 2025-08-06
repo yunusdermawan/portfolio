@@ -5,6 +5,7 @@ const ctrl = require('../controllers/certificationController')
 
 router.get('/', ctrl.getCertifications)
 router.get('/title', ctrl.getCertificationByTitle)
+router.post('/create', ctrl.createCertification)
 
 router.get('/:id', ctrl.getCertificationById)
 

@@ -30,4 +30,33 @@ ctrl.getCertificationByTitle = async (req, res) => {
     }
 }
 
+ctrl.createCertification = async (req, res) => {
+    try {
+        const {
+            user_id, 
+            title, 
+            issuer, 
+            issue_date, 
+            cert_url
+        } = req.body
+        const result = await model.createCertification(
+            user_id, 
+            title, 
+            issuer, 
+            issue_date, 
+            cert_url
+        )
+        return res.json({
+            id: result.insertId,
+            user_id, 
+            title, 
+            issuer, 
+            issue_date, 
+            cert_url
+        })
+    } catch(err) {
+        res.json('Error : ' + err)
+    }
+}
+
 module.exports = ctrl

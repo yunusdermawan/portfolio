@@ -29,4 +29,13 @@ model.getCertificationByTitle = async (title) => {
     }
 }
 
+model.createCertification = async (user_id, title, issuer, issue_date, cert_url) => {
+    try {  
+        const [rows] = await db.query('INSERT INTO certifications (user_id, title, issuer, issue_date, cert_url) VALUES (?, ?, ?, ?, ?)', [user_id, title, issuer, issue_date, cert_url])
+        return rows
+    } catch(err) {
+        throw 'Error : ' + err
+    }
+}
+
 module.exports = model
