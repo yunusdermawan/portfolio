@@ -29,9 +29,63 @@ model.getCertificationByTitle = async (title) => {
     }
 }
 
-model.createCertification = async (user_id, title, issuer, issue_date, cert_url) => {
+model.createCertification = async ({
+    user_id, 
+    title, 
+    issuer, 
+    issue_date, 
+    cert_url
+}) => {
     try {  
-        const [rows] = await db.query('INSERT INTO certifications (user_id, title, issuer, issue_date, cert_url) VALUES (?, ?, ?, ?, ?)', [user_id, title, issuer, issue_date, cert_url])
+        const [rows] = await db.query(`INSERT INTO certifications (
+            user_id, 
+            title, 
+            issuer, 
+            issue_date, 
+            cert_url
+            ) VALUES (
+             ?, 
+             ?, 
+             ?, 
+             ?, 
+             ?
+             )`, [
+                user_id, 
+                title, 
+                issuer, 
+                issue_date, 
+                cert_url
+            ])
+        return rows
+    } catch(err) {
+        throw 'Error : ' + err
+    }
+}
+
+model.updateCertification = async ({
+    user_id, 
+    title, 
+    issuer, 
+    issue_date, 
+    cert_url,
+    id
+}) => {
+    try {
+        const [rows] = await db.query(`UPDATE certifications SET 
+            user_id = ?, 
+            title = ?, 
+            issuer = ?, 
+            issue_date = ?, 
+            cert_url = ? 
+            WHERE id = ?
+            `, [
+                user_id, 
+                title, 
+                issuer, 
+                issue_date, 
+                cert_url,
+                id
+            ])
         return rows
     } catch(err) {
         throw 'Error : ' + err

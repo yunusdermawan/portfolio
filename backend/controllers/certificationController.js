@@ -59,4 +59,37 @@ ctrl.createCertification = async (req, res) => {
     }
 }
 
+ctrl.updateCertification = async (req, res) => {
+    try {
+        const id = req.params.id
+        const {
+            user_id, 
+            title, 
+            issuer, 
+            issue_date, 
+            cert_url
+        } = req.body
+        const result = await model.updateCertification({
+            user_id, 
+            title, 
+            issuer, 
+            issue_date, 
+            cert_url,
+            id
+        })
+        return res.json(
+            `Certificate ` + id + ` is successfully updated!\n` +
+            `
+            user_id : ${user_id} 
+            title : ${title}
+            issuer : ${issuer}
+            issue_date ${issue_date}
+            cert_url: ${cert_url}
+            `
+        )
+    } catch(err) {
+        res.json('Error : ' + err)
+    }
+}
+
 module.exports = ctrl

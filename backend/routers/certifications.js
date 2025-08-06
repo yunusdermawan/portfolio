@@ -8,7 +8,7 @@ router.get('/title', ctrl.getCertificationByTitle)
 router.post('/create', ctrl.createCertification)
 
 router.get('/:id', ctrl.getCertificationById)
-
+router.put('/:id', ctrl.updateCertification)
 
 
 module.exports = router
