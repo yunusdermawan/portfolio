@@ -11,5 +11,13 @@ model.getEducations = async () => {
     }
 }
 
+model.getEducationById = async (id) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM educations WHERE id = ?', [id])
+        return rows
+    } catch(err) {
+        throw 'Error : ' + err.message
+    }
+}
 
 module.exports = model
