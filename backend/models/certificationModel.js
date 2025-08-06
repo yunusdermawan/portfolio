@@ -20,4 +20,13 @@ model.getCertificationById = async (id) => {
     }
 }
 
+model.getCertificationByTitle = async (title) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM certifications WHERE title = ?', [title])
+        return rows
+    } catch(err) {
+        throw 'Error : ' + err
+    }
+}
+
 module.exports = model

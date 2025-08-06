@@ -25,7 +25,7 @@ ctrl.getSingleUserById = async (req, res) => {
 
 ctrl.getSingleUserByName = async (req, res) => {
     try {
-        const {name} = req.body
+        const {name} = req.query
         const result = await model.getSingleUserByName(name)
         return res.json(result)
     } catch(err) {

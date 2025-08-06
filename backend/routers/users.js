@@ -4,9 +4,10 @@ const ctrl = require('../controllers/userController');
 
 
 router.get('/', ctrl.getUsers);
-router.get('/:id', ctrl.getSingleUserById)
 router.get('/name', ctrl.getSingleUserByName)
 router.post('/create', ctrl.createUser)
+
+router.get('/:id', ctrl.getSingleUserById)
 router.put('/:id', ctrl.updateUser)
 
 
