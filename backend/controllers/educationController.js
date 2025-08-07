@@ -20,4 +20,42 @@ ctrl.getEducationById = async (req, res) => {
     }
 }
 
+ctrl.createEducation = async (req, res) => {
+    try {
+        const {
+            user_id, 
+            school, 
+            degree, 
+            major, 
+            start_year, 
+            end_year, 
+            description, 
+            document_url
+        } = req.body
+        const result = await model.createEducation(
+            user_id, 
+            school, 
+            degree, 
+            major, 
+            start_year, 
+            end_year, 
+            description, 
+            document_url
+        )
+        return res.json({
+            id: result.insertId,
+            user_id, 
+            school, 
+            degree, 
+            major, 
+            start_year, 
+            end_year, 
+            description, 
+            document_url
+        })
+    } catch(err) {
+        res.json('Error : ' + err)
+    }
+}
+
 module.exports = ctrl

@@ -4,6 +4,8 @@ const ctrl = require('../controllers/educationController')
 
 
 router.get('/', ctrl.getEducations)
+router.post('/create', ctrl.createEducation)
+
 router.get('/:id', ctrl.getEducationById)
 
 
